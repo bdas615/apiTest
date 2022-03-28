@@ -13,8 +13,7 @@ export class AppComponent {
 
   title='';
 
-  
-  userData:any;
+  userData:any=[];
 
   constructor(private dataService:DataService) {}
   
@@ -22,11 +21,16 @@ export class AppComponent {
   {
    this.dataService.getUserData().subscribe(data=>{
 
-    
      console.log(data);
      this.userData=data;
-  
+     this.userData=this.userData.results;
+     
    })
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.userData.filter = filterValue.trim().toLowerCase();
   }
 }  
 
